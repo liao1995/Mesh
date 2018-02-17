@@ -8,8 +8,6 @@
 #include <mutex>
 #include <shared_mutex>
 
-#include "sanitizer/sanitizer_stoptheworld.h"
-
 #include "heaplayers.h"
 
 #include "binnedtracker.h"
@@ -381,7 +379,7 @@ public:
   }
 
 protected:
-  static void performMeshing(const __sanitizer::SuspendedThreadsList &suspendedThreads, void *argument) {
+  static void performMeshing(void *argument) {
     MeshArguments *args = (MeshArguments *)argument;
 
     for (auto &mergeSet : args->mergeSets) {
@@ -442,8 +440,8 @@ protected:
 
     _stats.meshCount += args.mergeSets.size();
 
-    // run the actual meshing with the world stopped
-    __sanitizer::StopTheWorld(performMeshing, &args);
+    // TODO: run the actual meshing with the world stopped
+    performMeshing(&args);
 
     _lastMesh = std::chrono::high_resolution_clock::now();
 
