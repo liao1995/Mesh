@@ -1,1 +1,14 @@
-python atsy/example/comp_analysis.py -c atsy/example/comp_analysis_conf_speedometer.py --content-processes 0 -b Firefox --per_tab_pause 200
+#!/bin/bash
+
+MAX_MAP_COUNT="$(sysctl vm.max_map_count | cut -d '=' -f 2)"
+
+if (( $MAX_MAP_COUNT < 100000 )); then
+   echo "increase max_map_count before test:"
+   echo sudo su -c "'echo 655350 > /proc/sys/vm/max_map_count'"
+   exit 1
+fi
+
+pkill geckodriver
+pkill firefox
+
+exec env/bin/python atsy/example/comp_analysis.py -c atsy/example/comp_analysis_conf_speedometer.py --content-processes 0 -b Firefox --per_tab_pause 150 --settle_wait_time 1
