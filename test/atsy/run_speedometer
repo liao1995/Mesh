@@ -11,4 +11,21 @@ fi
 pkill geckodriver
 pkill firefox
 
-exec env/bin/python atsy/example/comp_analysis.py -c atsy/example/comp_analysis_conf_speedometer.py --content-processes 0 -b Firefox --per_tab_pause 150 --settle_wait_time 1
+# for suffix in 0n 0y 1y 2y; do
+for suffix in 2y 1y 0y 0n; do
+    export TEST_LD_PRELOAD=libmesh${suffix}.so
+    export TEST_NAME=mesh${suffix}
+    export MALLOCSTATS=1
+    env/bin/python atsy/example/comp_analysis.py -c atsy/example/comp_analysis_conf_speedometer.py --content-processes 0 -b Firefox --per_tab_pause 140 --settle_wait_time 1
+
+    pkill geckodriver
+    pkill firefox
+done
+
+pkill geckodriver
+pkill firefox
+
+unset MALLOCSTATS
+
+export TEST_NAME=jemalloc
+env/bin/python atsy/example/comp_analysis.py -c atsy/example/comp_analysis_conf_speedometer.py --content-processes 0 -b Firefox --per_tab_pause 140 --settle_wait_time 1

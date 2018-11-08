@@ -1,0 +1,13 @@
+#!/bin/bash
+
+version=60.2.2
+
+if [ ! -z "$TEST_LD_PRELOAD" ]; then
+    arg="-env LD_PRELOAD=$TEST_LD_PRELOAD"
+    binary=/opt/firefox-${version}-nojemalloc/bin/firefox
+else
+    arg=''
+    binary=/opt/firefox-${version}-jemalloc/bin/firefox
+fi
+
+exec mstat -o ~/src/mesh/test/atsy/data/speedometer.$TEST_NAME.tsv $arg $binary "$@"
