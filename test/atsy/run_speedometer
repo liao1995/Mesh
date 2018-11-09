@@ -5,6 +5,7 @@ MAX_MAP_COUNT="$(sysctl vm.max_map_count | cut -d '=' -f 2)"
 if (( $MAX_MAP_COUNT < 100000 )); then
    echo "increase max_map_count before test:"
    echo sudo su -c "'echo 655350 > /proc/sys/vm/max_map_count'"
+   echo sudo cpupower frequency-set -g performance
    exit 1
 fi
 
