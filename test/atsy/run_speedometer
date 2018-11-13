@@ -19,10 +19,12 @@ for suffix in 2y 1y 0y 0n; do
     export MALLOCSTATS=1
     env/bin/python atsy/example/comp_analysis.py -c atsy/example/comp_analysis_conf_speedometer.py --content-processes 0 -b Firefox --per_tab_pause 140 --settle_wait_time 1
 
+    sleep 2
     pkill geckodriver
     pkill firefox
 done
 
+sleep 2
 pkill geckodriver
 pkill firefox
 
