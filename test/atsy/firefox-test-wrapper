@@ -3,8 +3,8 @@
 DATE=`date +%s.%N`
 SUFFIX=`cat /dev/urandom | tr -cd 'a-f0-9' | head -c 8`
 
-# version=57.0.4
-version=60.2.2
+version=57.0.4
+# version=60.2.2
 
 if [ ! -z "$TEST_LD_PRELOAD" ]; then
     arg="-env LD_PRELOAD=$TEST_LD_PRELOAD"
