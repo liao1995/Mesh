@@ -12,11 +12,11 @@ fi
 pkill geckodriver
 pkill firefox
 
-# export TEST_LD_PRELOAD=libmesh2y.so
-# export TEST_NAME=mesh
-# export MALLOCSTATS=1
-# env/bin/python atsy/example/comp_analysis.py -c atsy/example/comp_analysis_conf_speedometer.py --content-processes 0 -b Firefox --per_tab_pause 140 --settle_wait_time 1
-# exit
+export TEST_LD_PRELOAD=libmesh.so
+export TEST_NAME=mesh
+export MALLOCSTATS=1
+env/bin/python atsy/example/comp_analysis.py -c atsy/example/comp_analysis_conf_speedometer.py --content-processes 0 -b Firefox --per_tab_pause 140 --settle_wait_time 1
+exit
 
 # for suffix in 2y 1y 0y 0n; do
 for suffix in 0n 0y 1y 2y; do
