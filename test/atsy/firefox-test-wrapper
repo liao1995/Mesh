@@ -3,6 +3,8 @@
 DATE=`date +%s.%N`
 SUFFIX=`cat /dev/urandom | tr -cd 'a-f0-9' | head -c 8`
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
+
 version=57.0.4
 # version=60.2.2
 
@@ -14,4 +16,4 @@ else
     binary=/opt/firefox-${version}-jemalloc/bin/firefox
 fi
 
-exec mstat -o "$HOME/src/mesh/test/atsy/data/speedometer.$TEST_NAME.$DATE-$SUFFIX.tsv" $arg $binary "$@"
+exec mstat -o "$DIR/data/speedometer.$TEST_NAME.$DATE-$SUFFIX.tsv" $arg $binary "$@"
